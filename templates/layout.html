@@ -1,0 +1,577 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Centuria</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{url_for('static',filename='css/layout.css')}}">
+</head>
+
+<body>
+    
+    <!-- {% block menu %}
+    {% endblock %} -->
+    
+    <div class="menu">
+        <div class="dropdown">
+            <button class="dropbtnSup">Archivo</button>
+            <div class="dropdown-content">
+                <div class="dropdown nested-dropdown">
+                    <button class="dropbtn">Base de datos ></button>
+                    <div class="nested-dropdown-content">
+                        <!-- <button class="link" type="file" name="file">Cargar base de datos  </button> -->
+                        <!-- <form action="/upload" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="fileInput" style="display: none;">
+                            <button class="link" type="button" onclick="document.getElementById('fileInput').click();">Cargar base de datos</button>
+                            <span id="fileName"></span>
+                            <br>
+                            <input type="submit" value="Cargar Archivo" style="display: none;">
+                        </form> -->
+                        <form id="fileForm" enctype="multipart/form-data">
+                            <input type="file" name="file" id="fileInput">
+                            <button type="button" id="uploadButton">Cargar Archivo</button>
+                        </form>
+                        
+                        <button class="link" >¿Qué base de datos se está usando?</button>
+                    </div>
+                </div>
+                <div class="dropdown nested-dropdown">
+                    <button class="dropbtn">Reportes ></button>
+                    <div class="nested-dropdown-content">
+                        <button class="link">Estado del evento</button>
+                        <button class="link">Destino de reportes</button>
+                    </div>
+                </div>
+                <div class="dropdown nested-dropdown">
+                    <button class="dropbtn">Impresión masiva ></button>
+                    <div class="nested-dropdown-content">
+                        <button class="link">Imprimir preacreditados</button>
+                        <button class="link">Imprimir presentes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtnSup">Configuración</button>
+            <div class="dropdown-content">
+            <button class="link">Configurar Etiquetas</button>
+            <button class="link">Configurar Diplomas</button>
+            <div class="dropdown nested-dropdown">
+                <button class="dropbtn">Elegir impresoras ></button>
+                <div class="nested-dropdown-content">
+                    <button class="link">Impresora para etiquetas</button>
+                    <button class="link">Impresora para diplomas</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- --------------------------- main------------------------- -->
+    
+    <section class="main">
+        
+        <section>
+            <section class="Busqueda">
+                
+                <div class="campos">
+                    <div class="titulo"><h2>Búsqueda</h2></div>
+                    
+                
+                    
+                    <div class="row">
+                        <div class="col-auto">
+                        <label>Apellido </label>
+                        </div>
+                        <div class="col-auto">
+                        <input id="apellidoBusqueda" >
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                        <label> Nombre </label>
+                        </div>
+                        <div>
+                        <input id="nombreBusqueda">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                        <label style="margin-left: 59%;margin-right: calc(6vh + 2vw);">ID</label>
+                        </div>
+                        <div class="col-auto">
+                        <input for="idBusqueda">
+                        </div>
+                    </div>
+                </div>
+                <div id="columna2">
+                    <div id="botones">
+                        <button style="width: calc(5vw + 6vh);">Búsqueda Avanzada</button>
+                        <button style="width: calc(4vw + 5vh);">Nuevo</button>
+                    </div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Campos Tabla</button>
+                        <div class="dropdown-content">
+                            <form id="checklist">
+                                <div class="renglon">
+                                    <label>ID</label><br>
+                                    <input type="checkbox" name=2 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Apellido</label><br>
+                                    <input type="checkbox" name=3 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Nombre</label><br>
+                                    <input type="checkbox" name=4 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>3er Campo</label><br>
+                                    <input type="checkbox" name=5 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Beca</label><br>
+                                    <input type="checkbox" name=6 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>nro Beca</label><br>
+                                    <input type="checkbox" name=7 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Credencial</label><br>
+                                    <input type="checkbox" name=8 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Presente</label><br>
+                                    <input type="checkbox" name=9 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Dirección</label><br>
+                                    <input type="checkbox" name=10 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cod Postal</label><br>
+                                    <input type="checkbox" name=11 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Ciudad</label><br>
+                                    <input type="checkbox" name=12 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Provincia</label><br>
+                                    <input type="checkbox" name=13 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>País</label><br>
+                                    <input type="checkbox" name=14 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Teléfono</label><br>
+                                    <input type="checkbox" name=15 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Celular</label><br>
+                                    <input type="checkbox" name=16 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Fax</label><br>
+                                    <input type="checkbox" name=17 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Email</label><br>
+                                    <input type="checkbox" name=18 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Profesión</label><br>
+                                    <input type="checkbox" name=19 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Epecialidad</label><br>
+                                    <input type="checkbox" name=20 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Institución</label><br>
+                                    <input type="checkbox" name=21 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cargo</label><br>
+                                    <input type="checkbox" name=22 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cargo</label><br>
+                                    <input type="checkbox" name=23 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Matrícula</label><br>
+                                    <input type="checkbox" name=24 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>DNI</label><br>
+                                    <input type="checkbox" name=25 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Precongreso</label><br>
+                                    <input type="checkbox" name=26 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cursos</label><br>
+                                    <input type="checkbox" name=27 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cursos Varios</label><br>
+                                    <input type="checkbox" name=28 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Socio</label><br>
+                                    <input type="checkbox" name=29 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>No Socio</label><br>
+                                    <input type="checkbox" name=30 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Pago</label><br>
+                                    <input type="checkbox" name=31 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Debe</label><br>
+                                    <input type="checkbox" name=32 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Monto Pago</label><br>
+                                    <input type="checkbox" name=33 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Recibo</label><br>
+                                    <input type="checkbox" name=34 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Efectivo</label><br>
+                                    <input type="checkbox" name=35 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cheque</label><br>
+                                    <input type="checkbox" name=36 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Depósito</label><br>
+                                    <input type="checkbox" name=37 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Tarjeta</label><br>
+                                    <input type="checkbox" name=38 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Cuit</label><br>
+                                    <input type="checkbox" name=39 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Preacreditado</label><br>
+                                    <input type="checkbox" name=40 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Web</label><br>
+                                    <input type="checkbox" name=41 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 1</label><br>
+                                    <input type="checkbox" name=42 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 2</label><br>
+                                    <input type="checkbox" name=43 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 3</label><br>
+                                    <input type="checkbox" name=44 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 4</label><br>
+                                    <input type="checkbox" name=45 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 5</label><br>
+                                    <input type="checkbox" name=46 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 6</label><br>
+                                    <input type="checkbox" name=47 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 7</label><br>
+                                    <input type="checkbox" name=48 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 8</label><br>
+                                    <input type="checkbox" name=49 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 9</label><br>
+                                    <input type="checkbox" name=50 checked>
+                                </div>
+                                <div class="renglon">
+                                    <label>Comentario 10</label><br>
+                                    <input type="checkbox" name=51 checked>
+                                </div>
+
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+            
+            <div class="tablaScroll">
+                <table id="tablaDatos" class="display">
+                    <thead>
+                        <tr>
+                            <th id="n"style="left: -2vh;padding: 0 10;">#</th> <!-- Encabezado para el número de fila -->
+                            
+                            <th id="id"><div style="padding: 0 10;">ID</div></th>
+                            <th id="apellido"><div style="padding: 0 30;">Apellido</div></th>
+                            <th id="nombre"><div style="padding: 0 30;">Nombre</div></th>
+                            <th id="3erCampo"><div style="padding: 0 10;">3er campo</div></th>
+                            <th id="beca"><div style="padding: 0 13;">Beca</div></th>
+                            <th id="nroBeca"><div style="padding: 0 13;">Nro Beca</div></th>
+                            <th id="credencial"><div style="padding: 0 13;">Credencial</div></th>
+                            <th id="presente"><div style="padding: 0 13;">Presente</div></th>
+                            <th id="direccion"><div style="padding: 0 13;">Dirección</div></th>
+                            <th id="codPostal"><div style="padding: 0 13;">Cod Postal</div></th>
+                            <th id="ciudad"><div style="padding: 0 13;">Ciudad</div></th>
+                            <th id="provincia"><div style="padding: 0 13;">Provincia</div></th>
+                            <th id="pais"><div style="padding: 0 13;">País</div></th>
+                            <th id="telefono"><div style="padding: 0 13;">Teléfono</div></th>
+                            <th id="celular"><div style="padding: 0 13;">Celular</div></th>
+                            <th id="fax"><div style="padding: 0 13;">Fax</div></th>
+                            <th id="email"><div style="padding: 0 13;">Email</div></th>
+                            <th id="profesion"><div style="padding: 0 13;">Profesión</div></th>
+                            <th id="especialidad"><div style="padding: 0 13;">Especialidad</div></th>
+                            <th id="institucion"><div style="padding: 0 13;">Intitución</div></th>
+                            <th id="cargo"><div style="padding: 0 13;">Cargo</div></th>
+                            <th id="matricula"><div style="padding: 0 13;">Matrícula</div></th>
+                            <th id="dni"><div style="padding: 0 13;">DNI</div></th>
+                            <th id="precongreso"><div style="padding: 0 13;">Precongreso</div></th>
+                            <th id="cursos"><div style="padding: 0 13;">Cursos</div></th>
+                            <th id="cursoVarios"><div style="padding: 0 13;">Curso Varios</div></th>
+                            <th id="socio"><div style="padding: 0 13;">Socio</div></th>
+                            <th id="noSocio"><div style="padding: 0 13;">No Socio</div></th>
+                            <th id="pago"><div style="padding: 0 13;">Pago</div></th>
+                            <th id="debe"><div style="padding: 0 13;">Debe</div></th>
+                            <th id="montoPago"><div style="padding: 0 13;">MontoPago</div></th>
+                            <th id="recibo"><div style="padding: 0 13;">Recibo</div></th>
+                            <th id="efectivo"><div style="padding: 0 13;">Efectivo</div></th>
+                            <th id="cheque"><div style="padding: 0 13;">Cheque</div></th>
+                            <th id="deposito"><div style="padding: 0 13;">Depósito</div></th>
+                            <th id="tarjeta"><div style="padding: 0 13;">Tarjeta</div></th>
+                            <th id="cuit"><div style="padding: 0 13;">Cuit</div></th>
+                            <th id="preacredito"><div style="padding: 0 13;">Preacreditado</div></th>
+                            <th id="web"><div style="padding: 0 13;">Web</div></th>
+                            <th id="comentario1"><div style="padding: 0 13;">Comentario 1</div></th>
+                            <th id="comentario2"><div style="padding: 0 13;">Comentario 2</div></th>
+                            <th id="comentario3"><div style="padding: 0 13;">Comentario 3</div></th>
+                            <th id="comentario4"><div style="padding: 0 13;">Comentario 4</div></th>
+                            <th id="comentario5"><div style="padding: 0 13;">Comentario 5</div></th>
+                            <th id="comentario6"><div style="padding: 0 13;">Comentario 6</div></th>
+                            <th id="comentario7"><div style="padding: 0 13;">Comentario 7</div></th>
+                            <th id="comentario8"><div style="padding: 0 13;">Comentario 8</div></th>
+                            <th id="comentario9"><div style="padding: 0 13;">Comentario 9</div></th>
+                            <th id="comentario10"><div style="padding: 0 13;">Comentario 10</div></th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <!-- Contenido generado automáticamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="row darPresente">
+                <label>Dar presente </label>
+                <input id="darPresente">
+            </div>
+        </section>
+<!-- ----------------- Detalles ----------------------------- -->
+        <section class="Detalles columna">
+            <h2>Detalles</h2>
+            <a href="https://www.concacaf.com/es"><img src="" alt=""></a>
+            
+            
+            <div class="camposPrincipalesDetalles fila width100">
+                <div class="columna width70">
+                    <div class="row">
+                        <label >Apellido </label>
+                        <input id="apellidoDetalles" class="width80">
+                    </div>
+                    <div class="row">
+                        <label class="width20"> Nombre </label>
+                        <input id="nombreDetalles" class="width80">                
+                    </div>
+                    <div class="row">
+                        <label class="width5">ID</label>
+                        <input id="id" class="width15">
+                        <label class="width100">3er Campo</label>
+                        <input id="3erCampoDetalles" class="width40">
+                    </div>
+                    <div class="row">
+                        <label class="width20"> Credencial </label>
+                        <input id="credencialDetalles" class="width80">               
+                    </div>
+                    <div class="row">
+                        <label >Beca</label>
+                        <input id="beca" class="width30">
+                        <label >Nro Beca</label>
+                        <input id="nroBecaDetalles" class="width30">
+                    </div>
+                </div>
+                <div class="botonesVertical columna">
+                    <button>Credencial</button>
+                    <button>Diploma</button>
+                </div>
+            </div>
+            <div class="botonesHorizontal fila">
+                <button>Recibos</button>
+                <button>Cancelar</button>
+                <button>Guardar sin imprimir</button>
+                <button>Actualizar</button>
+            </div>
+
+            <div class="fila checkBoxes">
+                <input type="checkbox" id="checkBoxPresente">
+                <label>Presente</label>
+                <input type="checkbox" id="checkBoxPreacreditado">
+                <label>Preacreditado</label>
+                <label style="margin-left: calc(1vh + 0.5vw);margin-right: -0.8vw;">Debe</label>
+                <input id="textBoxDebe" type="text" style="width: 35%;">
+            </div>
+
+            
+            <div class="tab">
+                <button class="tablinks" id="botondatosPersonalesTab" onclick="openTab('datosPersonalesTab')">Datos Personales</button>
+                <button class="tablinks" id="botondatosCongresoTab"onclick="openTab('datosCongresoTab')">Datos del Congreso</button>
+                <button class="tablinks" id="botoncomentariosTab"onclick="openTab('comentariosTab')">Comentarios</button>
+            </div>
+            
+                <!-- Contenido de la pestaña de datos personales -->
+                <!-- Aquí va el contenido de la pestaña de datos personales -->
+            <div id="datosPersonalesTab" class="tabDetalles">
+                
+                <label>Documento</label>
+                <input type="text" id="documentoTextbox" class="textbox">
+                <label style="margin-left:1.8vw">Pais</label>
+                <input type="text" id="paisTextbox" class="textbox"><br>
+                
+                <label style="margin-left: 1.7vw;">Provincia</label>
+                <input type="text" id="provinciaTextbox" class="textbox">
+                <label for="ciudadTextbox">Ciudad</label>
+                <input type="text" id="ciudadTextbox" class="textbox"><br>
+                <label for="direccionTextbox" style="margin-left:1.5vw">Dirección</label>
+                <input type="text" id="direccionTextbox" class="textbox">
+                <label for="codPostalTextbox" style="margin-left:2.6vw">CP</label>
+                <input type="text" id="codPostalTextbox" class="textbox"><br>
+                
+                <label for="telefonoTextbox" style="margin-left:2vw">Teléfono</label>
+                <input type="text" id="telefonoTextbox" class="textbox">
+                <label for="celTextbox" style="margin-left:2.5vw">Cel</label>
+                <input type="text" id="celTextbox" class="textbox"><br>
+                <label for="faxTextbox" style="margin-left:5vw">Fax</label>
+                <input type="text" id="faxTextbox" class="textbox">
+                <label for="emailTextbox" style="margin-left:1vw">Email</label>
+                <input type="text" id="emailTextbox" class="textbox"><br>
+                <label for="webTextbox" style="margin-left:4.1vw">Web</label>
+                <input type="text" id="webTextbox" class="textbox">
+                <label for="cuitTextbox" style="margin-left:2vw">Cuit</label>
+                <input type="text" id="cuitTextbox" class="textbox"><br><br>
+
+                <label ><s>--------------------------------</s>Datos Profesionales<s>--------------------------------</s></label><br>
+                <label for="profesionTextbox" style="margin-left:0.5vw">Profesión</label>
+                <input type="text" id="profesionTextbox" class="textbox">
+                <label for="especialidadTextbox"style="margin-right:-0.5vw">Especialidad</label>
+                <input type="text" id="especialidadTextbox" style="width: 26%;"class="textbox"><br>
+                <label for="institucionTextbox">Institución</label>
+                <input type="text" id="institucionTextbox" class="textbox">
+                <label for="cargoTextbox" style="margin-left:1.5vw">Cargo</label>
+                <input type="text" id="cargoTextbox" class="textbox"><br>
+                <label for="matriculaTextbox"style="margin-left:0.7vw">Matrícula</label>
+                <input type="text" id="matriculaTextbox" class="textbox">
+            </div>
+            
+            
+            <!-- Contenido de la pestaña de datos del congreso -->
+            <!-- Aquí va el contenido de la pestaña de datos del congreso -->
+            <div id="datosCongresoTab" class="tabDetalles">
+                <label for="precongresoTextbox">Precongreso</label>
+                <input type="text" id="precongresoTextbox" class="textbox">
+                <label for="cursosTextbox">Cursos</label>
+                <input type="text" id="cursosTextbox" class="textbox"><br>
+                <label for="cursoVariosTextbox">Curso Varios</label>
+                <input type="text" id="cursoVariosTextbox" class="textbox">
+                <label for="sociosTextbox">Socios</label>
+                <input type="text" id="sociosTextbox" class="textbox"><br>
+                <label for="noSociosTextbox" style="margin-left:1.9vw">No Socios</label>
+                <input type="text" id="noSociosTextbox" class="textbox">
+
+                <br><br><label ><s>------------------------------------</s>  Datos De Pago   <s>---------------------------------</s></label><br>
+                <label for="pagoTextbox"style="margin-left:4.2vw">Pagó</label>
+                <input type="text" id="pagoTextbox" class="textbox">
+                <label for="debeTextbox" style="margin-left:1.4vw">Debe</label>
+                <input type="text" id="debeTextbox" class="textbox"><br>
+                <label for="montoPagoTextbox">Monto Pago</label>
+                <input type="text" id="montoPagoTextbox" class="textbox">
+                <label for="reciboTextbox" style="margin-left: 0.6vw;">Recibo</label>
+                <input type="text" id="reciboTextbox" class="textbox"><br>
+                <label for="efectivoTextbox"style="margin-left: 2.6vw;">Efectivo</label>
+                <input type="text" id="efectivoTextbox" class="textbox">
+                <label for="chequeTextbox">Cheque</label>
+                <input type="text" id="chequeTextbox" class="textbox"><br>
+                <label for="depositoTextbox"style="margin-left: 1.9vw;">Depósito</label>
+                <input type="text" id="depositoTextbox" class="textbox">
+                <label for="tarjetaTextbox">Tarjeta</label>
+                <input type="text" id="tarjetaTextbox" class="textbox">
+            </div>
+            
+            <!-- Contenido de la pestaña de comentarios -->
+            <!-- Aquí va el contenido de la pestaña de comentarios -->
+            <div id="comentariosTab" class="tabDetalles"style="width: 100%;">
+                <label for="comentario1Textbox">Comentario 1</label>
+                <input type="text" id="comentario1Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario2Textbox">Comentario 2</label>
+                <input type="text" id="comentario2Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario3Textbox">Comentario 3</label>
+                <input type="text" id="comentario3Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario4Textbox">Comentario 4</label>
+                <input type="text" id="comentario4Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario5Textbox">Comentario 5</label>
+                <input type="text" id="comentario5Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario6Textbox">Comentario 6</label>
+                <input type="text" id="comentario6Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario7Textbox">Comentario 7</label>
+                <input type="text" id="comentario7Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario8Textbox">Comentario 8</label>
+                <input type="text" id="comentario8Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario9Textbox">Comentario 9</label>
+                <input type="text" id="comentario9Textbox" class="textbox"style="width: 65%;"><br>
+                <label for="comentario10Textbox">Comentario 10</label>
+                <input type="text" id="comentario10Textbox" class="textbox"style="width: 65%;"><br>
+            </div>
+        
+            
+        </section>
+    </section>    
+    
+    
+    <footer>
+        <p class="copyright">Desarrollador: <a href="https://www.linkedin.com/in/ignacio-omar-morales/">Ignacio morales</a></p>
+        
+        <p class="copyright">Copyright © 2024</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/funciones.js') }}"></script>
+    <!-- <script src="../static/js/funciones.js"></script> -->
+    
+</body>
+
+</html>
